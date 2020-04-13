@@ -1,0 +1,59 @@
+﻿@page "/dropdownlistfeatures"
+@using Syncfusion.Blazor
+@using Syncfusion.Blazor.DropDowns
+@using Syncfusion.Blazor.Data
+<h2>Dropdown List</h2>
+<br />
+<div id="ControlRegion">
+    <div class="col-lg-12 control-section">
+        <div class="control_wrapper">
+
+            <SfDropDownList TValue="Guid" TItem="LocationAreaModel" Placeholder="Select a location area" Query="@Query" AllowFiltering="true">
+                <SfDataManager Url="https://ezmgr.azurewebsites.net/api/Test/TrackerSearch" Adaptor="Syncfusion.Blazor.Adaptors.WebApiAdaptor" CrossDomain=true></SfDataManager>
+                <DropDownListFieldSettings Text="LocationAreaName" Value="LocationAreaId"></DropDownListFieldSettings>
+
+            </SfDropDownList>
+
+        </div>
+    </div>
+</div>
+<style>
+    .control_wrapper {
+        width: 350px;
+        margin: 0 auto;
+        padding-top: 70px;
+    }
+</style>
+@code {
+    public Query Query = new Query().Select(new List<string> { "LocationAreaId", "LocationAreaName" }).Take(60).RequiresCount();
+
+    public class LocationAreaModel
+    {
+        public Guid LocationAreaId { get; set; }
+        public string LocationAreaName { get; set; }
+    }
+}
+
+<br />
+<div>
+    <h3>Selected Features:</h3>
+    <ul class="ulstyle">
+        <li class="list"> Dropdown List Samples - Default</li>
+        <li class="list"> Theme - Bootstrap v4</li>
+    </ul>
+</div>
+<br />
+<style>
+    .ulstyle {
+        margin: 0px;
+        padding-left: 20px;
+        display: inline-block;
+    }
+
+    .list {
+        float: left;
+        line-height: 20px;
+        margin: 10px;
+        min-width: 300px;
+    }
+</style>
